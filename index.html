@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alexandra Nicole De Asis — Operations & Executive Support</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --ink:#131B24;
+    --ink-soft:#232E3B;
+    --paper:#ECEEE8;
+    --panel:#FFFFFF;
+    --amber:#E2A73E;
+    --teal:#2F5D56;
+    --line:#C9C4B6;
+    --line-dark:#3B4756;
+    --muted:#6B7280;
+
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    font-family:var(--body);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.55;
+  }
+
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--ink);
+    color:var(--paper);
+    border-bottom:1px solid var(--line-dark);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    text-decoration:none;
+  }
+  .brand strong{color:var(--amber); font-weight:600;}
+  .navlinks{display:flex; gap:28px; list-style:none;}
+  .navlinks a{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:#B7BEC7;
+    transition:color .15s ease;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--amber);}
+  .navtoggle{display:none; background:none; border:1px solid var(--line-dark); color:var(--paper); font-family:var(--mono); font-size:12px; padding:8px 12px; cursor:pointer;}
+
+  @media (max-width:720px){
+    .navlinks{
+      position:absolute; top:64px; left:0; right:0;
+      background:var(--ink);
+      flex-direction:column; gap:0;
+      border-bottom:1px solid var(--line-dark);
+      max-height:0; overflow:hidden;
+      transition:max-height .25s ease;
+    }
+    .navlinks.open{max-height:320px;}
+    .navlinks a{padding:16px 32px; border-top:1px solid var(--line-dark); width:100%;}
+    .navtoggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:var(--ink);
+    color:var(--paper);
+    padding:72px 0 96px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.3fr 0.9fr;
+    gap:56px;
+    align-items:center;
+  }
+  @media (max-width:820px){
+    .hero .wrap{grid-template-columns:1fr;}
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--amber);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:20px;
+  }
+  .dot{width:7px; height:7px; border-radius:50%; background:var(--amber); box-shadow:0 0 0 3px rgba(226,167,62,0.2);}
+
+  h1{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(34px, 5vw, 54px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    margin-bottom:20px;
+  }
+  h1 em{
+    font-style:normal;
+    color:var(--amber);
+  }
+
+  .hero p.lede{
+    font-size:17px;
+    color:#C6CBD2;
+    max-width:46ch;
+    margin-bottom:32px;
+  }
+
+  .hero-cta{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:14px 22px;
+    display:inline-block;
+    border:1px solid transparent;
+    transition:transform .15s ease, opacity .15s ease;
+  }
+  .btn-primary{background:var(--amber); color:var(--ink);}
+  .btn-ghost{border-color:var(--line-dark); color:var(--paper);}
+  .btn:hover{transform:translateY(-1px);}
+
+  /* photo frame in hero */
+  .photo-frame{
+    aspect-ratio:4/5;
+    border:1px solid var(--line-dark);
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 14px);
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    padding:24px;
+    position:relative;
+  }
+  .photo-frame::before{
+    content:"";
+    position:absolute; inset:10px;
+    border:1px dashed var(--line-dark);
+  }
+  .photo-frame .label{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+    line-height:1.7;
+  }
+  .photo-frame img{width:100%; height:100%; object-fit:cover; position:absolute; inset:0;}
+
+  /* ---------- SECTION SCAFFOLDING ---------- */
+  section{padding:88px 0;}
+  .section-head{
+    display:flex; align-items:baseline; gap:16px;
+    margin-bottom:40px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:18px;
+  }
+  .section-head .tag{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--teal);
+  }
+  .section-head h2{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:28px;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+  }
+  @media (max-width:720px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{margin-bottom:16px; color:#333;}
+  .stat-list{list-style:none;}
+  .stat-list li{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:16px 0; border-top:1px solid var(--line);
+    font-family:var(--mono); font-size:13px;
+  }
+  .stat-list li:last-child{border-bottom:1px solid var(--line);}
+  .stat-list .num{font-family:var(--display); font-size:22px; color:var(--teal); font-weight:600;}
+
+  /* ---------- READINESS PANEL (signature element) ---------- */
+  .readiness{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .readiness .section-head{border-bottom-color:var(--line-dark);}
+  .readiness .section-head .tag{color:var(--amber);}
+  .readiness .section-head p.sub{
+    font-family:var(--mono); font-size:12px; color:var(--muted); margin-top:6px;
+  }
+  .panel-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:var(--line-dark);
+    border:1px solid var(--line-dark);
+  }
+  @media (max-width:720px){.panel-grid{grid-template-columns:1fr;}}
+  .panel-cell{
+    background:var(--ink);
+    padding:26px 28px;
+  }
+  .panel-cell .k{
+    font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:10px; display:flex; justify-content:space-between;
+  }
+  .panel-cell .k .state{color:var(--amber);}
+  .panel-cell .v{font-family:var(--body); font-size:16px; margin-bottom:14px;}
+  .bars{display:flex; gap:4px; align-items:flex-end; height:20px;}
+  .bars span{flex:1; background:var(--line-dark); display:block;}
+  .bars span.on{background:var(--amber);}
+  .bars span:nth-child(1){height:40%;}
+  .bars span:nth-child(2){height:60%;}
+  .bars span:nth-child(3){height:80%;}
+  .bars span:nth-child(4){height:100%;}
+  .bars span:nth-child(5){height:70%;}
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{border-top:1px solid var(--line);}
+  .role{
+    display:grid;
+    grid-template-columns:180px 1fr;
+    gap:32px;
+    padding:32px 0;
+    border-bottom:1px solid var(--line);
+  }
+  @media (max-width:720px){.role{grid-template-columns:1fr; gap:8px;}}
+  .role .when{
+    font-family:var(--mono); font-size:12px; color:var(--teal); letter-spacing:0.04em;
+  }
+  .role h3{font-family:var(--display); font-size:19px; font-weight:600; margin-bottom:4px;}
+  .role .org{font-family:var(--mono); font-size:12px; color:var(--muted); margin-bottom:14px; display:block; text-transform:uppercase; letter-spacing:0.06em;}
+  .role ul{padding-left:18px; color:#333;}
+  .role li{margin-bottom:6px;}
+
+  /* ---------- SKILLS ---------- */
+  .skill-cats{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+  }
+  @media (max-width:820px){.skill-cats{grid-template-columns:1fr;}}
+  .skill-cats .cat{background:var(--panel); padding:26px 26px 30px;}
+  .skill-cats .cat h4{
+    font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--teal); margin-bottom:16px;
+  }
+  .chip-list{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-family:var(--mono); font-size:12px;
+    border:1px solid var(--line); padding:6px 10px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;
+  }
+  @media (max-width:720px){.gallery-grid{grid-template-columns:1fr 1fr;}}
+  .gallery-item{
+    aspect-ratio:1/1;
+    background:var(--panel);
+    border:1px dashed var(--line);
+    display:flex; align-items:center; justify-content:center;
+    padding:16px; text-align:center;
+    position:relative;
+  }
+  .gallery-item .label{font-family:var(--mono); font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; line-height:1.7;}
+  .gallery-item img{width:100%; height:100%; object-fit:cover; position:absolute; inset:0;}
+
+  /* ---------- EDUCATION / LANGUAGE ---------- */
+  .duo{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:720px){.duo{grid-template-columns:1fr;}}
+  .duo .cell{background:var(--panel); padding:28px;}
+  .duo h4{font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:var(--teal); margin-bottom:14px;}
+  .duo .big{font-family:var(--display); font-weight:600; font-size:18px; margin-bottom:4px;}
+  .duo .sub{font-family:var(--mono); font-size:12px; color:var(--muted);}
+  .lang-row{display:flex; justify-content:space-between; padding:10px 0; border-top:1px solid var(--line); font-family:var(--mono); font-size:13px;}
+  .lang-row:first-of-type{border-top:none;}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{
+    background:var(--ink); color:var(--paper);
+    padding:72px 0 40px;
+  }
+  footer .wrap{display:grid; grid-template-columns:1.2fr 1fr; gap:40px;}
+  @media (max-width:720px){footer .wrap{grid-template-columns:1fr;}}
+  footer h2{font-family:var(--display); font-size:30px; font-weight:600; margin-bottom:16px;}
+  footer p{color:#B7BEC7; max-width:44ch; margin-bottom:24px;}
+  .contact-list{list-style:none;}
+  .contact-list li{
+    border-top:1px solid var(--line-dark); padding:14px 0;
+    display:flex; justify-content:space-between; font-family:var(--mono); font-size:13px;
+  }
+  .contact-list li:last-child{border-bottom:1px solid var(--line-dark);}
+  .contact-list a{text-decoration:none; color:var(--amber);}
+  .fine{
+    font-family:var(--mono); font-size:11px; color:var(--muted);
+    margin-top:48px; padding-top:24px; border-top:1px solid var(--line-dark);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a class="brand" href="#top">A. NICOLE <strong>DE ASIS</strong></a>
+    <button class="navtoggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">MENU</button>
+    <ul class="navlinks" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#readiness">Systems</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> Available for full-time roles</div>
+      <h1>Operations run cleaner<br>when <em>someone owns</em><br>every moving part.</h1>
+      <p class="lede">Alexandra Nicole De Asis — Operations & Executive Support professional with 8+ years leading remote teams, executive workflows, and revenue-generating operations across hospitality, manufacturing, and digital services.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#contact">Get in touch</a>
+        <a class="btn btn-ghost" href="#experience">View experience</a>
+      </div>
+    </div>
+    <div class="photo-frame">
+      <!-- REPLACE THIS DIV'S CONTENT WITH: <img src="photos/headshot.jpg" alt="Alexandra Nicole De Asis"> -->
+      <div class="label">HEADSHOT<br>PLACEHOLDER<br>— replace with<br>photos/headshot.jpg —</div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">01 — Profile</span>
+      <h2>About</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I lead business operations and support executives across hospitality, manufacturing, and digital service industries — currently overseeing daily operations for a remote team inside a creator management agency generating USD $1.5M+ in monthly recurring revenue.</p>
+        <p>My work sits at the intersection of people and process: coaching underperforming team members, building the SOPs that keep a team consistent, and reading KPI dashboards closely enough to catch a problem before it becomes one.</p>
+        <p>Based in Lipa City, Philippines. Fluent in English (C1 CEFR) and native in Filipino, with flexible availability across US, UK, and AU time zones.</p>
+      </div>
+      <ul class="stat-list">
+        <li><span>Years in operations & exec support</span><span class="num">8+</span></li>
+        <li><span>Monthly revenue supported</span><span class="num">$1.5M+</span></li>
+        <li><span>Rental properties managed</span><span class="num">32</span></li>
+        <li><span>Time zones covered</span><span class="num">4</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="experience" style="background:var(--panel); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">02 — Track record</span>
+      <h2>Experience</h2>
+    </div>
+    <div class="timeline">
+
+      <div class="role">
+        <div class="when">May 2026 — Present</div>
+        <div>
+          <h3>Operations Team Lead</h3>
+          <span class="org">Remote Creator Management Agency</span>
+          <ul>
+            <li>Lead daily operations for a remote team responsible for customer engagement and revenue generation across digital creator accounts.</li>
+            <li>Monitor KPIs including response times, conversation management, sales performance, and conversion metrics to maintain operational targets.</li>
+            <li>Coach underperforming team members, conduct performance evaluations, and onboard new hires.</li>
+            <li>Review outbound marketing campaigns and promotional messaging to maximize engagement and sales.</li>
+            <li>Coordinate shift schedules, operational reporting, and workflow distribution across the team.</li>
+            <li>Support business operations for an organization generating USD $1.5M+ in monthly recurring revenue.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="when">May 2025 — May 2026</div>
+        <div>
+          <h3>Operations Administrator</h3>
+          <span class="org">Vacation Alchemy</span>
+          <ul>
+            <li>Managed operations for 32 short-term rental properties, coordinating guest communications, maintenance vendors, and daily workflows.</li>
+            <li>Optimized listings, monitored KPIs, and maintained operational systems to improve occupancy and guest satisfaction.</li>
+            <li>Developed SOPs that reduced operational errors and improved team efficiency.</li>
+            <li>Managed CRM workflows, invoicing, and issue resolution while maintaining excellent customer service.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="when">Apr 2019 — Mar 2025</div>
+        <div>
+          <h3>Executive Assistant & Operations Coordinator</h3>
+          <span class="org">Freelance</span>
+          <ul>
+            <li>Managed executive calendars, inboxes, travel logistics, meetings, and confidential communications.</li>
+            <li>Prepared presentations, reports, documentation, and executive materials.</li>
+            <li>Coordinated projects across multiple stakeholders using CRM and project management tools.</li>
+            <li>Supported branding initiatives through Canva, social media coordination, and client communications.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="when">Apr 2015 — Mar 2024</div>
+        <div>
+          <h3>Operations Manager</h3>
+          <span class="org">Panga Royale Food Processing</span>
+          <ul>
+            <li>Supervised production operations and trained staff to maintain productivity and quality standards.</li>
+            <li>Led HACCP, GMP, and Bureau of Customs accreditation projects to ensure regulatory compliance.</li>
+            <li>Implemented Lean/Kaizen initiatives that improved operational efficiency and supported long-term client retention.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">03 — Capability</span>
+      <h2>Skills & Tools</h2>
+    </div>
+    <div class="skill-cats">
+      <div class="cat">
+        <h4>Operations & Leadership</h4>
+        <div class="chip-list">
+          <span class="chip">Operations Management</span>
+          <span class="chip">Team Leadership</span>
+          <span class="chip">Performance Management</span>
+          <span class="chip">KPI Reporting</span>
+          <span class="chip">Process Improvement</span>
+          <span class="chip">SOP Development</span>
+          <span class="chip">Workforce Scheduling</span>
+          <span class="chip">Vendor Management</span>
+        </div>
+      </div>
+      <div class="cat">
+        <h4>Executive & Client Support</h4>
+        <div class="chip-list">
+          <span class="chip">Executive Support</span>
+          <span class="chip">Calendar & Inbox Mgmt</span>
+          <span class="chip">Travel Coordination</span>
+          <span class="chip">Customer Success</span>
+          <span class="chip">CRM Administration</span>
+          <span class="chip">Project Coordination</span>
+        </div>
+      </div>
+      <div class="cat">
+        <h4>Platforms & Tools</h4>
+        <div class="chip-list">
+          <span class="chip">Google Workspace</span>
+          <span class="chip">Microsoft 365</span>
+          <span class="chip">Asana</span>
+          <span class="chip">ClickUp</span>
+          <span class="chip">Monday.com</span>
+          <span class="chip">Notion</span>
+          <span class="chip">Trello</span>
+          <span class="chip">Canva</span>
+          <span class="chip">CapCut</span>
+          <span class="chip">ChatGPT</span>
+          <span class="chip">Claude</span>
+          <span class="chip">Grammarly</span>
+          <span class="chip">Perplexity</span>
+          <span class="chip">Google Apps Script</span>
+          <span class="chip">Slack</span>
+          <span class="chip">Zoom</span>
+          <span class="chip">Loom</span>
+          <span class="chip">Calendly</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="readiness" class="readiness">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="tag">04 — Work readiness</span>
+        <h2>Systems status</h2>
+        <p class="sub">What "remote-ready" actually means — checked and current</p>
+      </div>
+    </div>
+    <div class="panel-grid">
+      <div class="panel-cell">
+        <div class="k">Connectivity <span class="state">● stable</span></div>
+        <div class="v">PLDT Fiber 300 Mbps (primary) · Globe 5G hotspot (backup)</div>
+        <div class="bars"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div>
+      </div>
+      <div class="panel-cell">
+        <div class="k">Power redundancy <span class="state">● ready</span></div>
+        <div class="v">Anker 25000mAh power bank — 3-hour backup runtime</div>
+        <div class="bars"><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span></div>
+      </div>
+      <div class="panel-cell">
+        <div class="k">Equipment</div>
+        <div class="v">Huawei D15 laptop · Razer BlackShark V2 Pro noise-cancelling headset · integrated webcam</div>
+      </div>
+      <div class="panel-cell">
+        <div class="k">Workspace</div>
+        <div class="v">Dedicated home office · quiet environment · professional video-call background</div>
+      </div>
+      <div class="panel-cell">
+        <div class="k">Availability</div>
+        <div class="v">Full-time · flexible across US (EST/PST), UK (GMT), AU (AEST)</div>
+      </div>
+      <div class="panel-cell">
+        <div class="k">Languages</div>
+        <div class="v">English — C1 CEFR · Filipino — Native</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" style="border-top:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">05 — In the field</span>
+      <h2>Gallery</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><div class="label">PHOTO 1<br>replace with<br>photos/photo-1.jpg</div></div>
+      <div class="gallery-item"><div class="label">PHOTO 2<br>replace with<br>photos/photo-2.jpg</div></div>
+      <div class="gallery-item"><div class="label">PHOTO 3<br>replace with<br>photos/photo-3.jpg</div></div>
+      <div class="gallery-item"><div class="label">PHOTO 4<br>replace with<br>photos/photo-4.jpg</div></div>
+      <div class="gallery-item"><div class="label">PHOTO 5<br>replace with<br>photos/photo-5.jpg</div></div>
+      <div class="gallery-item"><div class="label">PHOTO 6<br>replace with<br>photos/photo-6.jpg</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:88px 0 40px;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">06 — Background</span>
+      <h2>Education</h2>
+    </div>
+    <div class="duo">
+      <div class="cell">
+        <h4>Degree</h4>
+        <div class="big">BS in Hotel and Restaurant Management</div>
+        <div class="sub">First Asia Institute of Technology and Humanities · Tanauan City, Philippines · 2017</div>
+      </div>
+      <div class="cell">
+        <h4>Languages</h4>
+        <div class="lang-row"><span>English</span><span>C1 CEFR</span></div>
+        <div class="lang-row"><span>Filipino</span><span>Native</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <h2>Let's talk operations.</h2>
+      <p>Open to full-time operations, executive support, and remote team leadership roles. Reach out directly — I typically reply within a day.</p>
+      <a class="btn btn-primary" href="mailto:alexandranyxx@gmail.com">Email me</a>
+    </div>
+    <ul class="contact-list">
+      <li><span>Email</span><a href="mailto:alexandranyxx@gmail.com">alexandranyxx@gmail.com</a></li>
+      <li><span>Phone</span><span>+63 967 495 9388</span></li>
+      <li><span>Location</span><span>Lipa City, Philippines</span></li>
+      <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/alexandra-nicole-de-asis-253048323" target="_blank" rel="noopener">View profile</a></li>
+    </ul>
+  </div>
+  <div class="wrap fine">
+    <span>© <span id="year"></span> Alexandra Nicole De Asis</span>
+    <span>Built as a portfolio site — edit freely</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+</script>
+
+</body>
+</html>
